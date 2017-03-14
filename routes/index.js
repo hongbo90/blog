@@ -27,11 +27,13 @@ app.post('/reg',(req,res)=>{
 
 	if(password_re != password){
 		req.flash('error','两次输入的密码不一致！');
+		console.log('不一致');
 		return res.redirect('/reg');
 	}
 
 	var md5 = crypto.createHash('md5'),
-		passwrod = md5.update(req.body.password).digest('hex');
+		password = md5.update(req.body.password).digest('hex');
+		console.log(password);
 	var newUser = new User({
 		name:name,
 		password:password,
@@ -41,7 +43,7 @@ app.post('/reg',(req,res)=>{
 	User.get(newUser,(err,user)=>{
 		if(err){
 			req.flash('error',err);
-			console.log("error");
+			console.log("error：",err);
 			return res.redirect('/');
 		}
 

@@ -53,7 +53,7 @@ User.get = (name,callback)=>{
 				return callback(err);
 			}
 
-			collectoin.findOne({
+			collection.findOne({
 				name:name
 			},(err,user)=>{
 				mongodb.close();
